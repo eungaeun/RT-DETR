@@ -1,0 +1,96 @@
+
+
+# train_dataloader: 
+#   type: DataLoader
+#   dataset: 
+#     type: CocoDetection
+#     img_folder: C:/PE_data/pe_data_mini/train/images/
+#     ann_file: C:/PE_data/pe_data_mini/annotations/train_coco.json
+#     transforms:
+#       type: Compose
+#       ops: ~
+#   shuffle: True
+#   batch_size: 8
+#   num_workers: 4
+#   drop_last: True 
+
+
+# val_dataloader:
+#   type: DataLoader
+#   dataset: 
+#     type: CocoDetection
+#     img_folder: C:/PE_data/pe_data_mini/val/images/
+#     ann_file: C:/PE_data/pe_data_mini/annotations/val_coco.json
+#     transforms:
+#       type: Compose
+#       ops: ~ 
+
+#   shuffle: False
+#   batch_size: 8
+#   num_workers: 4
+#   drop_last: False
+
+
+# test_dataloader:
+#   type: sample
+#   dataset: 
+#     type: CocoDetection
+#     img_folder:  C:/PE_data/pe_data_mini/test/images/
+#     ann_file: C:/PE_data/pe_data_mini/annotations/test_coco.json
+#     transforms:
+#       type: Compose
+#       ops: ~ 
+
+#   shuffle: False
+#   batch_size: 8
+#   num_workers: 4
+#   drop_last: False
+
+task: detection
+
+evaluator:
+  type: CocoEvaluator
+  iou_types: ['bbox', ]
+
+# num_classes: 365
+# remap_mscoco_category: False
+
+# num_classes: 91
+# remap_mscoco_category: False
+
+num_classes: 10
+remap_mscoco_category: True
+
+
+train_dataloader: 
+  type: DataLoader
+  dataset: 
+    type: CocoDetection
+    img_folder: C:/PE_data/pe_data_mini/train/images/
+    ann_file: C:/PE_data/pe_data_mini/annotations/train_coco.json
+    return_masks: False
+    transforms:
+      type: Compose
+      ops: ~
+  shuffle: True
+  num_workers: 4
+  drop_last: True 
+  collate_fn:
+    type: BatchImageCollateFuncion
+
+
+val_dataloader:
+  type: DataLoader
+  dataset: 
+    type: CocoDetection
+    img_folder: C:/PE_data/pe_data_mini/val/images/
+    ann_file: C:/PE_data/pe_data_mini/annotations/val_coco.json
+    return_masks: False
+    transforms:
+      type: Compose
+      ops: ~ 
+  shuffle: False
+  num_workers: 4
+  drop_last: False
+  collate_fn:
+    type: BatchImageCollateFuncion

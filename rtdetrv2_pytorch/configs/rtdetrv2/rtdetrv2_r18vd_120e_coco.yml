@@ -1,5 +1,5 @@
 __include__: [
-  '../dataset/coco_detection.yml',
+  '../dataset/PE_coco_detection.yml',
   '../runtime.yml',
   './include/dataloader.yml',
   './include/optimizer.yml',
@@ -7,9 +7,9 @@ __include__: [
 ]
 
 
-output_dir: ./output/rtdetrv2_r18vd_120e_coco
+output_dir: ./output/rtdetrv2_r18vd_120e_coco/sep09/no_pretrain
 
-
+epoches : 150
 PResNet:
   depth: 18
   freeze_at: -1

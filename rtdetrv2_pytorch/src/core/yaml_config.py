@@ -146,9 +146,9 @@ class YAMLConfig(BaseConfig):
     def get_rank_batch_size(cfg):
         """compute batch size for per rank if total_batch_size is provided.
         """
-        assert ('total_batch_size' in cfg or 'batch_size' in cfg) \
-            and not ('total_batch_size' in cfg and 'batch_size' in cfg), \
-                '`batch_size` or `total_batch_size` should be choosed one'
+        # assert ('total_batch_size' in cfg or 'batch_size' in cfg) \
+        #     and not ('total_batch_size' in cfg and 'batch_size' in cfg), \
+        #         '`batch_size` or `total_batch_size` should be choosed one'
 
         total_batch_size = cfg.get('total_batch_size', None)
         if total_batch_size is None:

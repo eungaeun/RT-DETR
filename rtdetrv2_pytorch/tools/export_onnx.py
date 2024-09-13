@@ -84,9 +84,9 @@ def main(args, ):
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--config', '-c', type=str, )
-    parser.add_argument('--resume', '-r', type=str, )
-    parser.add_argument('--output_file', '-o', type=str, default='model.onnx')
+    parser.add_argument('--config', '-c', type=str, default = "C:/DeepLearning/RT-DETR/rtdetrv2_pytorch/configs/rtdetrv2/rtdetrv2_r18vd_120e_coco.yml" )
+    parser.add_argument('--resume', '-r', type=str, default = "C:/DeepLearning/RT-DETR/output/rtdetrv2_r18vd_120e_coco/sep09/no_pretrain/best.pth" )
+    parser.add_argument('--output_file', '-o', type=str, default='./output/rtdetrv2_r18vd_120e_coco/sep09/no_pretrain/0909_rtdetrv2_12o_xpretrain_best118.onnx')
     parser.add_argument('--check',  action='store_true', default=False,)
     parser.add_argument('--simplify',  action='store_true', default=False,)
 

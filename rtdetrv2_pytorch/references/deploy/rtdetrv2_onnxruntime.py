@@ -16,10 +16,16 @@ def draw(images, labels, boxes, scores, thrh = 0.6):
         scr = scores[i]
         lab = labels[i][scr > thrh]
         box = boxes[i][scr > thrh]
+        category_name = [ "white", "white_front", "blue_s", "blue_s_pin", "blue_m", "blue_m_pin", "blue_l", "blue_l_pin", "locker_front", "locker_side"]
+        print('lab type: ', lab.dtype)
+        print('scrtype: ', scr.dtype)
+        print('box type: ', box.dtype)
+        print('scr: ', scr)
 
         for b in box:
             draw.rectangle(list(b), outline='red',)
-            draw.text((b[0], b[1]), text=str(lab[i].item()), fill='blue', )
+            # draw.text((b[0], b[1]), text=str(lab[i].item()), fill='blue', )
+            draw.text((b[0], b[1]), text=f"{category_name[i]} {round(scr[i].item(), 2)}", fill='blue', size = 10)
 
         im.save(f'results_{i}.jpg')
 
@@ -47,6 +53,9 @@ def main(args, ):
     )
 
     labels, boxes, scores = output
+    print("ori type: ", orig_size.dtype)
+    # print('scores: ', scores)
+    # print(boxes)
 
     draw([im_pil], labels, boxes, scores)
 
@@ -54,8 +63,10 @@ def main(args, ):
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument('--onnx-file', type=str, )
-    parser.add_argument('--im-file', type=str, )
-    # parser.add_argument('-d', '--device', type=str, default='cpu')
+    parser.add_argument('--onnx-file', type=str,default = "C:/DeepLearning/RT-DETR/output/rtdetrv2_r18vd_120e_coco/sep09/no_pretrain/0909_rtdetrv2_12o_xpretrain_best118.onnx" )
+    parser.add_argument('--im-file', type=str, default = "C:/PE_data/pe_data_mini/test/images/0812c1_001.png")
+    # parser.add_argument('--im-file', type=str, default = "C:/PE_data/pe_data_0711-0812/test/images/153.png")
+    parser.add_argument('-d', '--device', type=str, default='cuda')
     args = parser.parse_args()
     main(args)
+
